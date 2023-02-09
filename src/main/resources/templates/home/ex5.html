@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+
+
+	<div>
+		한줄출력 : <span>
+			<h6 th:text="${list}"></h6>
+		</span>
+	</div>
+
+	<!-- th:block 사용. div를 여러개 묶어서 한번에 반복할 때 사용 -->
+	<th:block th:each="dto : ${list}">
+		<div>
+			사용자번호 : <span th:text="${dto.sno}"></span>
+			시간 : <span >[[${dto.regtime}]]</span>
+			</div>
+			
+			<div>
+			사용자이름 : <span th:text="${dto.sno%3==0}?${dto.first}:${dto.last}"></span>
+			<!--3항연산자-->
+			<hr />
+		</div>
+	
+	</th:block>
+
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+
+<body>
+    <h3 th:text="'result : '+${result}"></h3>
+    <h3 th:text="${dto}"></h3>
+    <hr />
+
+    <script th:inline="javascript">
+        var msg = [[${result}]]
+        var dto = [[${dto}]]
+        console.log(msg);
+    </script>
+    <!-- 자바스크립트로 값 담아서 전달하기. 에러 떠도 에러 아님-->
+
+<!-- 다양한 방식으로 출력 -->
+    <table>
+        <tr>
+            <th>sno</th>
+          <td>[[${dto.sno}]] [[${msg}]]<!--  <td th:text="${dto.sno}"> --></td>
+        </tr>
+        <tr>
+            <th>first</th>
+            <td th:each="value : ${dto}">[[${value.first}]]</td>
+        </tr>
+        <tr>
+        <th>last</th>
+        <td th:each="value : ${dto}">[[${value.last}]]</td>
+        </tr>
+        <tr>
+        <th>regtime</th>
+        <td th:each="value : ${dto}" th:text="${value.regtime}"></td>
+        </tr>
+        <tr>
+
+
+
+
+
+
+    </table>
+
+
+</body>
+
+</html>

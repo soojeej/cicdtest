@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <h1 th:text="${'Hello World 2'}"></h1> 
+    <!-- vscode에서 thtxt 하고 탭 하면 자동으로 나옴
+    브라우저에서 페이지소스 보기 하면 타임리프라는거 안나옴. 그냥 html문서처럼 나옴.-->
+
+    <ul>
+        <!--th:each = "변수 : ${목록}"   . theach 하고 탭
+        jstl 과 el 과 if문 다 섞은 것 같은..-->
+        <li th:each="dto : ${list}">[[${dto}]]</li>
+    </ul>
+    <ul>
+        <li th:each=" dto,state: ${list}">
+            [[${state.index}]]---[[${dto}]]   <!--인덱스 주기. 몇번째인지. foreach는 순서가 없으니 순서주기.-->            
+        </li>
+    </ul>
+    
+    <h2>제어문 처리</h2>
+    <p>제어문 th:if ~ unless, 삼항연산자 스타일 사용할 수 있음. jstl과 if문 섞은거?</p>
+    <hr /> <!-- 구분선 -->
+    <ul>
+    	<li th:each="dto, state : ${list}" th:if="${dto.sno %3==0}">
+            [[${dto}]]  <!--3으로 나눈 나머지가 0이면 그때의 값만 보여줘라. 즉 3의 배수만.-->
+        </li>
+    </ul>
+
+    <hr>
+    <ul>
+        <li th:each="dto, state : ${list}">
+            <span th:if="${dto.sno %3==0}" th:text="${'-----------------'+dto.sno}"></span>
+            <span th:unless="${dto.sno%3==0}" th:text="${dto.first}"></span>
+        </li>
+    </ul>
+
+    <hr>
+    <p>타임리프는 삼항연산자 사용할 수 있는데 특이하게도 단순 if와 같이 2개의 항만을 처리할 수 있다.</p>
+    <ul>
+        <li th:each="dto, state : ${list}" th:text="${dto.sno%3==0}?${dto.sno}"></li>
+        <!--3의 배수가 참이라면 그 값 출력. 아닌것들은 값 전달 안됨.-->
+    </ul>
+
+    <hr>
+    <ul>
+        <li th:each="dto, state : ${list}" th:text="${dto.sno %3 ==0}?${dto.sno}:${dto.first}"></li>
+    </ul>
+
+    <hr>
+
+    <style>
+        .target{
+            background-color: red;
+        }
+    </style>
+    <ul>
+        <li th:each="dto, state : ${list}" th:class="${dto.sno %3==0}?'target'" th:text="${dto}"></li>
+        <!--  3의 배수인 애들이 타겟이 됨. 걔네만 빨간색으로. -->
+    </ul>
+</body>
+</html>
